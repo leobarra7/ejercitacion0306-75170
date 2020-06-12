@@ -40,7 +40,8 @@ import { ListadoempresasserviceService } from './services/listadoempresasservice
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'inicio', component: InicioComponent },
       { path: 'articulos', component: ArticulosComponent },
-      { path: 'articulosfamilias', component: ArticulosFamiliasComponent }
+      { path: 'articulosfamilias', component: ArticulosFamiliasComponent },
+      { path: 'listadoempresas', component: ListadoEmpresasComponent}
     ]),
     NgbPaginationModule,
     NgbModalModule,
@@ -48,7 +49,7 @@ import { ListadoempresasserviceService } from './services/listadoempresasservice
   entryComponents: [ModalDialogComponent],
   providers: [
      {provide: APP_BASE_HREF, useValue : '/' },
-    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true, providers: [ListadoempresasserviceService] }
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true, providers: [ListadoempresasserviceService], }
   ],
   bootstrap: [AppComponent]
 })

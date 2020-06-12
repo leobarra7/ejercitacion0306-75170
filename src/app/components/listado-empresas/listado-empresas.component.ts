@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ListadoempresasserviceService} from '../../services/listadoempresasservice';
-import {ListadoEmpresas} from '../../models/listado-empresas';
+import {ListadoEmpresa, ListadoEmpresas} from '../../models/listado-empresa';
 
 @Component({
   selector: 'app-listado-empresas',
@@ -8,7 +8,8 @@ import {ListadoEmpresas} from '../../models/listado-empresas';
   styleUrls: ['./listado-empresas.component.css']
 })
 export class ListadoEmpresasComponent implements OnInit {
-
+  Items = ListadoEmpresas;
+  Titulo = "Listado Empresas"
   constructor() { }
 
   ngOnInit() {
