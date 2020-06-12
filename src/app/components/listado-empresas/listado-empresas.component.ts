@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ListadoempresasserviceService} from '../../services/listadoempresasservice';
+import {ListadoempresasserviceService} from '../../services/listadoempresasservice.service';
 import {ListadoEmpresa, ListadoEmpresas} from '../../models/listado-empresa';
 
 @Component({
@@ -8,11 +8,21 @@ import {ListadoEmpresa, ListadoEmpresas} from '../../models/listado-empresa';
   styleUrls: ['./listado-empresas.component.css']
 })
 export class ListadoEmpresasComponent implements OnInit {
-  Items = ListadoEmpresas;
+  Items: ListadoEmpresas[] = [];
   Titulo = "Listado Empresas"
-  constructor() { }
+  constructor(
+    private listadoEmpresasService: ListadoempresasserviceService
+  ) { }
 
   ngOnInit() {
+    this.GetEmpresasListado();
+  }
+
+  GetEmpresasListado() {
+    this.listadoEmpresasService.get()
+    .subscribe((res:ListadoEmpresa[]) => {
+      this.Items = res;
+    });
   }
 
 }
