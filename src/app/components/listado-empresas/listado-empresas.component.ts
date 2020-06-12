@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ListadoempresasserviceService} from '../../services/listadoempresasservice';
+import {ListadoEmpresas} from '../../models/listado-empresas';
 
 @Component({
   selector: 'app-listado-empresas',
