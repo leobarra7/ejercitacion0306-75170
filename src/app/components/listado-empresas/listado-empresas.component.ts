@@ -3,6 +3,7 @@ import {ListadoempresasserviceService} from '../../services/listadoempresasservi
 import {ListadoEmpresa, ListadoEmpresas} from '../../models/listado-empresa';
 import { ReactiveFormsModule } from "@angular/forms";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ModalDialogService } from "../../services/modal-dialog.service";
 
 @Component({
   selector: 'app-listado-empresas',
@@ -12,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class ListadoEmpresasComponent implements OnInit {
   Items: ListadoEmpresa[] = [];
   Titulo = "Listado Empresas"
+  submitted = false;
   TituloAccionBM = {
     B:"(Eliminar)",
     M:"(Editar)",
@@ -25,11 +27,18 @@ export class ListadoEmpresasComponent implements OnInit {
   FormRegEmp: FormGroup;
   constructor(
     public formbuilder: FormBuilder,
-    private listadoEmpresasService: ListadoempresasserviceService
+    private listadoEmpresasService: ListadoempresasserviceService,
+    private modalDialogServiceEmp: ModalDialogService
   ) { }
 
   ngOnInit() {
     this.GetEmpresasListado();
+    this.FormRegEmp = this.formbuilder.group({
+      CantidadEmpleados: [null],
+      FechaFundacion: [null],
+      IdEmpresa: [null],
+      RazonSocial: [null]
+    });
   }
 
   GetEmpresasListado() {
@@ -48,14 +57,44 @@ export class ListadoEmpresasComponent implements OnInit {
   Editar(Dto) {
     this.AccionBM = "M";
   }
-   // grabar tanto altas como modificaciones
   Grabar() {
-    alert("Registro Grabado!");
-    this.Volver();
+    this.submitted = true;
+    // verificar que los validadores esten OK
+     if (this.FormRegEmp.invalid) {
+      return;
+    }
+
+    //hacemos una copia de los datos del formulario, para modificar la fecha y luego enviarlo al servidor
+    const itemCopy = { ...this.FormRegEmp.value };
+
+    //convertir fecha de string dd/MM/yyyy a ISO para que la entienda webapi
+    var arrFecha = itemCopy.FechaAlta.substr(0, 10).split("/");
+    if (arrFecha.length == 3)
+      itemCopy.FechaAlta = 
+          new Date(
+            arrFecha[2],
+            arrFecha[1] - 1,
+            arrFecha[0]
+          ).toISOString();
+
+    // agregar post
+    if (itemCopy.IdArticulo == 0 || itemCopy.IdArticulo == null) {
+      this.listadoEmpresasService.post(itemCopy).subscribe((res: any)=> {
+        this.Volver();
+        this.modalDialogServiceEmp.Alert('Registro agregado correctamente');
+      });
+    } else {
+      // modificar put
+      this.listadoEmpresasService
+        .put(itemCopy.IdArticulo, itemCopy)
+        .subscribe((res: any) => {
+          this.Volver();
+          this.modalDialogServiceEmp.Alert('Registro modificado correctamente.');
+        });
+    }
   }
   // Volver desde Agregar/Modificar
   Volver() {
     this.AccionBM = "L";
   }
-
 }

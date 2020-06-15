@@ -20,6 +20,10 @@
           <button type="button" class = "btn btn-sm btn-outline-primary" title="Editar" (click)="Editar(item)">
             <span class="fas fa-pencil-alt"></span>
           </button> 
+        	<button type="button" class="btn btn-sm btn-outline-danger"
+                    title="Eliminar" (click)="Eliminar(dto)">
+                    <span class="fas fa-times"></span>
+                </button>
         </td>
       </tr>
     </tbody>
@@ -35,7 +39,7 @@
 			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">Cantidad de Empleados <span
                     class="text-danger">*</span></label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" formControlName="CantidadEmpleados"  />
+				<input type="text" class="form-control" formControlName="CantidadEmpleados"/>
 			</div>
 		</div>
 
