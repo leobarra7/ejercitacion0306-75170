@@ -1,15 +1,16 @@
 <h3>{{Titulo}} <small>{{TituloAccionBM[AccionBM]}}</small></h3>
 <div>
-  <button type="button" class="btn btn-primary" (click)="Alta()">
+  <div class= "container">
+  <button type="button" class="btn btn-primary" (click)="Alta()" *ngIf="AccionBM == 'L'">
             <span class="fas fa-plus"> </span> 
             Agregar
   </button>
+  </div>
   <table class="table table-bordered table-striped" *ngIf="AccionBM == 'L'">
     <thead>
       <tr>
         <th class="text-center">CantidadEmpleados</th>
         <th class="text-center">FechaFundacion</th>
-        <th class="text-center">IdEmpresa</th>
         <th class="text-center">RazonSocial</th>
         <th class="text-center">Acciones</th>
       </tr>
@@ -18,7 +19,6 @@
       <tr *ngFor="let item of Items">
         <td>{{item.CantidadEmpleados}}</td>
         <td>{{item.FechaFundacion}}</td>
-        <td>{{item.IdEmpresa}}</td>
         <td>{{item.RazonSocial | uppercase}}</td>
         <td class="text-center text-nowrap">
           <button type="button" class = "btn btn-sm btn-outline-primary" title="Editar" (click)="Editar(item)">
@@ -56,17 +56,6 @@
                            name="FechaFundacion" formControlName="FechaFundacion" />
 			</div>
 		</div>
-
-	<!--campo idempresa-->
-		<div class="form-group row">
-			<label class="col-form-label col-sm-2 col-sm-offset-2" for="IdEmpresa">
-                Id Empresa <span class="text-danger">*</span>
-            </label>
-            <div class="col-sm-6">
-				<input class="form-control"
-                           name="IdEmpresa" formControlName="IdEmpresa" />
-			</div>
-		</div>
 		
     <!--campo razonSocial-->
 		<div class="form-group row">
@@ -94,8 +83,3 @@
 		<span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
 	</div>
 </form>
-
-
-
-
-
