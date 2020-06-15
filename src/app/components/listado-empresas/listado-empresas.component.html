@@ -17,9 +17,71 @@
         <td>{{item.IdEmpresa}}</td>
         <td>{{item.RazonSocial | uppercase}}</td>
         <td class="text-center text-nowrap">
-          <button type="button" 
+          <button type="button" class = "btn btn-sm btn-outline-primary" title="Editar" (click)="Editar (item)">
+            <span class="fas fa-pencil-alt"></span>
+          </button> 
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<!-- Registro en Alta,Modificacion y Consulta -->
+<form name="FormRegEmp" [formGroup]='FormRegEmp' *ngIf="AccionBM != 'L'" class="bg-light">
+
+	<fieldset>
+		<!--campo cantidadempleados-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">Cantidad de Empleados <span
+                    class="text-danger">*</span></label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" formControlName="CantidadEmpleados" 
+         [ngClass]="{'is-invalid': (FormReg.controls.CantidadEmpleados.touched || submitted)  
+            && FormReg.controls.CantidadEmpleados.errors}" />
+
+				<span class="text-danger" *ngIf="(FormReg.controls.CantidadEmpleados.touched || submitted) 
+                        && FormReg.controls.CantidadEmpleados.errors?.required">
+                    Dato requerido.
+                </span>
+			</div>
+		</div>
+
+<!--campo fechaFundacion-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2">Fecha de fundacion <span
+                    class="text-danger">*</span></label>
+			<div class="col-sm-6">
+				<input class="form-control"
+                           name="FechaFundacion" formControlName="FechaFundacion"
+                           [ngClass]="{'is-invalid': (FormReg.controls.FechaFundacion.touched || submitted)  
+            && FormReg.controls.FechaFundacion.errors}" />
+
+				<span class="text-danger" *ngIf="(FormReg.controls.FechaFundacion.touched || submitted) 
+                       && FormReg.controls.FechaFundacion.errors?.required">
+                    Dato requerido.
+                </span>
+				<span class="text-danger" *ngIf="(FormReg.controls.FechaFundacion.touched || submitted) 
+                       && FormReg.controls.FechaFundacion.errors?.pattern">
+                    Dato fecha, formato dd/mm/aaaa.
+        </span>
+			</div>
+		</div>
+
+	<!--campo idempresa-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="IdEmpresa">
+                Id Empresa <span class="text-danger">*</span>
+            </label>
+			<div class="col-sm-6">
+				<span class="text-danger" *ngIf="(FormReg.controls.IdEmpresa.touched || submitted) 
+                        && FormReg.controls.IdEmpresa.errors?.required">
+                    Dato requerido.
+                </span>
+			</div>
+		</div>
+		
+
+
+
+
+
