@@ -1,6 +1,6 @@
-<h3>{{Titulo}}</h3>
+<h3>{{Titulo}} <small>{{TituloAccionBM[AccionBM]}}</small></h3>
 <div>
-  <table class="table table-bordered table-striped">
+  <table class="table table-bordered table-striped" *ngIf="AccionBM == 'L'">
     <thead>
       <tr>
         <th class="text-center">CantidadEmpleados</th>
@@ -27,7 +27,7 @@
 </div>
 
 <!-- Registro en Alta,Modificacion y Consulta -->
-<form name="FormReg" [formGroup]='FormReg' *ngIf="AccionBM == 'M'" class="bg-light">
+<form name="FormRegEmp" [formGroup]= 'FormRegEmp' *ngIf="AccionBM == 'M'" class="bg-light">
 
 	<fieldset>
 		<!--campo cantidadempleados-->
@@ -35,14 +35,7 @@
 			<label class="col-form-label col-sm-2 col-sm-offset-2" for="Nombre">Cantidad de Empleados <span
                     class="text-danger">*</span></label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" formControlName="CantidadEmpleados" 
-         [ngClass]="{'is-invalid': (FormReg.controls.CantidadEmpleados.touched || submitted)  
-            && FormReg.controls.CantidadEmpleados.errors}" />
-
-				<span class="text-danger" *ngIf="(FormReg.controls.CantidadEmpleados.touched || submitted) 
-                        && FormReg.controls.CantidadEmpleados.errors?.required">
-                    Dato requerido.
-                </span>
+				<input type="text" class="form-control" formControlName="CantidadEmpleados"  />
 			</div>
 		</div>
 
@@ -52,18 +45,7 @@
                     class="text-danger">*</span></label>
 			<div class="col-sm-6">
 				<input class="form-control"
-                           name="FechaFundacion" formControlName="FechaFundacion"
-                           [ngClass]="{'is-invalid': (FormReg.controls.FechaFundacion.touched || submitted)  
-            && FormReg.controls.FechaFundacion.errors}" />
-
-				<span class="text-danger" *ngIf="(FormReg.controls.FechaFundacion.touched || submitted) 
-                       && FormReg.controls.FechaFundacion.errors?.required">
-                    Dato requerido.
-                </span>
-				<span class="text-danger" *ngIf="(FormReg.controls.FechaFundacion.touched || submitted) 
-                       && FormReg.controls.FechaFundacion.errors?.pattern">
-                    Dato fecha, formato dd/mm/aaaa.
-        </span>
+                           name="FechaFundacion" formControlName="FechaFundacion" />
 			</div>
 		</div>
 
@@ -72,14 +54,38 @@
 			<label class="col-form-label col-sm-2 col-sm-offset-2" for="IdEmpresa">
                 Id Empresa <span class="text-danger">*</span>
             </label>
-			<div class="col-sm-6">
-				<span class="text-danger" *ngIf="(FormReg.controls.IdEmpresa.touched || submitted) 
-                        && FormReg.controls.IdEmpresa.errors?.required">
-                    Dato requerido.
-                </span>
+            <div class="col-sm-6">
+				<input class="form-control"
+                           name="IdEmpresa" formControlName="IdEmpresa" />
 			</div>
 		</div>
 		
+    <!--campo razonSocial-->
+		<div class="form-group row">
+			<label class="col-form-label col-sm-2 col-sm-offset-2" for="RazonSocial">
+                Razón Social <span class="text-danger">*</span>
+            </label>
+            <div class="col-sm-6">
+				<input class="form-control"
+                           name="RazonSocial" formControlName="RazonSocial" />
+			</div>
+		</div>
+	</fieldset>
+      <!-- Botones Grabar, Cancelar/Volver' -->
+    <div class="row justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="Grabar()">
+            <span class="fas fa-check"></span> Grabar
+        </button>
+        &nbsp;
+        <button type="button" class="btn btn-warning" (click)="Volver()">
+            <span class="fas fa-undo"></span> Volver/Cancelar
+        </button>
+    </div>
+      <!--texto: Revisar los datos ingresados...-->
+    <div id="divMsjFormRegistro" class="row alert alert-danger">
+        <span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+    </div>
+</form>
 
 
 

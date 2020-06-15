@@ -8,7 +8,7 @@ import {ListadoEmpresa, ListadoEmpresas} from '../../models/listado-empresa';
   styleUrls: ['./listado-empresas.component.css']
 })
 export class ListadoEmpresasComponent implements OnInit {
-  Items: ListadoEmpresas[] = [];
+  Items: ListadoEmpresa[] = [];
   Titulo = "Listado Empresas"
   TituloAccionBM = {
     B:"(Eliminar)",
