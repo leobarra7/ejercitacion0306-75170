@@ -129,7 +129,7 @@ export class ListadoEmpresasComponent implements OnInit {
 
   // representa la baja logica 
   Eliminar(Dto) {
-    this.modalDialogServiceEmp.Confirm(
+   this.modalDialogServiceEmp.Confirm(
       "Esta seguro de eliminar este registro?",
       undefined,
       undefined,
@@ -137,7 +137,9 @@ export class ListadoEmpresasComponent implements OnInit {
       () =>
         this.listadoEmpresasService  
           .delete(Dto.IdEmpresa)
-          ,
+          .subscribe((res: any) => 
+            this.Buscar()
+          ),
       null
     );
   }

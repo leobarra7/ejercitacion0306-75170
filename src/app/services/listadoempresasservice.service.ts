@@ -31,7 +31,7 @@ export class ListadoempresasserviceService {
     return this.httpClient.put(this.resourceUrl + Id, obj);
   }
   
-  delete(Id: number) {
+  delete(Id) {
     return this.httpClient.delete(this.resourceUrl + Id);
   }
 }
