@@ -42,11 +42,7 @@ export class ListadoEmpresasComponent implements OnInit {
 
     //comienza la modificacion, luego la confirma con el metodo Grabar
   Editar(Dto) {
-    if (!Dto.Activo) {
-      alert("No puede modificarse un registro Inactivo.");
-      return;
-    }
-    this.BuscarPorId(Dto, "M");
+    this.AccionBM = "M";
   }
    // grabar tanto altas como modificaciones
   Grabar() {

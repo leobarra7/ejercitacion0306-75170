@@ -17,7 +17,7 @@
         <td>{{item.IdEmpresa}}</td>
         <td>{{item.RazonSocial | uppercase}}</td>
         <td class="text-center text-nowrap">
-          <button type="button" class = "btn btn-sm btn-outline-primary" title="Edit" (click)="Editar(item)">
+          <button type="button" class = "btn btn-sm btn-outline-primary" title="Editar" (click)="Editar(item)">
             <span class="fas fa-pencil-alt"></span>
           </button> 
         </td>
@@ -27,7 +27,7 @@
 </div>
 
 <!-- Registro en Alta,Modificacion y Consulta -->
-<form name="FormRegEmp" [formGroup]='FormRegEmp' *ngIf="AccionBM != 'L'" class="bg-light">
+<form name="FormReg" [formGroup]='FormReg' *ngIf="AccionBM == 'M'" class="bg-light">
 
 	<fieldset>
 		<!--campo cantidadempleados-->
