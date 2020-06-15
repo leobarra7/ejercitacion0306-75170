@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ListadoempresasserviceService} from '../../services/listadoempresasservice.service';
 import {ListadoEmpresa, ListadoEmpresas} from '../../models/listado-empresa';
+import { ReactiveFormsModule } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector: 'app-listado-empresas',
@@ -20,7 +22,9 @@ export class ListadoEmpresasComponent implements OnInit {
     SD: " No se encontraron registros...",
     RD: " Revisar los datos ingresados..."
   };
+  FormRegEmp: FormGroup;
   constructor(
+    public formbuilder: FormBuilder,
     private listadoEmpresasService: ListadoempresasserviceService
   ) { }
 
