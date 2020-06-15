@@ -1,5 +1,9 @@
 <h3>{{Titulo}} <small>{{TituloAccionBM[AccionBM]}}</small></h3>
 <div>
+  <button type="button" class="btn btn-primary" (click)="Alta()">
+            <span class="fas fa-plus"> </span> 
+            Agregar
+  </button>
   <table class="table table-bordered table-striped" *ngIf="AccionBM == 'L'">
     <thead>
       <tr>
@@ -31,7 +35,7 @@
 </div>
 
 <!-- Registro en Alta,Modificacion y Consulta -->
-<form name="FormRegEmp" [formGroup]='FormRegEmp' *ngIf="AccionBM == 'M'" class="bg-light">
+<form name="FormRegEmp" [formGroup]='FormRegEmp' *ngIf="AccionBM != 'L'" class="bg-light">
 
 	<fieldset>
 		<!--campo cantidadempleados-->
@@ -85,10 +89,10 @@
             <span class="fas fa-undo"></span> Volver/Cancelar
         </button>
     </div>
-      <!--texto: Revisar los datos ingresados...-->
-    <div id="divMsjFormRegistro" class="row alert alert-danger">
-        <span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
-    </div>
+     <!--texto: Revisar los datos ingresados...-->
+	<div id="divMsjFormRegistro" *ngIf="submitted && FormRegEmp.invalid" class="row alert alert-danger">
+		<span class="fas fa-exclamation-sign"></span>{{Mensajes['RD']}}
+	</div>
 </form>
 
 

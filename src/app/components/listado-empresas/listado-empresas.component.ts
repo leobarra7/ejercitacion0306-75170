@@ -15,6 +15,7 @@ export class ListadoEmpresasComponent implements OnInit {
   Titulo = "Listado Empresas"
   submitted = false;
   TituloAccionBM = {
+    A:"(Alta)",
     B:"(Eliminar)",
     M:"(Editar)",
     L:"(Listado)"
@@ -46,6 +47,15 @@ export class ListadoEmpresasComponent implements OnInit {
     .subscribe((res:ListadoEmpresa[]) => {
       this.Items = res;
     });
+  }
+
+   Alta() {
+    this.AccionBM = "A";
+    this.FormRegEmp.reset(this.FormRegEmp.value);
+
+    this.submitted = false;
+    //this.FormReg.markAsPristine();
+    this.FormRegEmp.markAsUntouched();
   }
     // Obtengo un registro especifico según el Id
   BuscarPorId(Dto, AccionBM) {
@@ -79,7 +89,7 @@ export class ListadoEmpresasComponent implements OnInit {
 
     // agregar post
     if (itemCopy.IdArticulo == 0 || itemCopy.IdArticulo == null) {
-      this.listadoEmpresasService.post(itemCopy).subscribe((res: any)=> {
+      this.listadoEmpresasService.post(itemCopy).subscribe((res: any) =>{
         this.Volver();
         this.modalDialogServiceEmp.Alert('Registro agregado correctamente');
       });
@@ -93,6 +103,14 @@ export class ListadoEmpresasComponent implements OnInit {
         });
     }
   }
+   // comienza la modificacion, luego la confirma con el metodo Grabar
+  Modificar(Dto) {
+    this.submitted = false;
+    this.FormRegEmp.markAsPristine();
+    this.FormRegEmp.markAsUntouched();
+    this.BuscarPorId(Dto, "M");
+  }
+
   // Volver desde Agregar/Modificar
   Volver() {
     this.AccionBM = "L";
